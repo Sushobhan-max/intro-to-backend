@@ -1,0 +1,21 @@
+// // const { createServer } = require('node:http');
+// import  {createServer}  from 'node:http';
+
+// const hostname = '127.0.0.1';
+// const port = 3000;
+
+// const server = createServer((req, res) => {
+//   res.statusCode = 200;
+//   res.setHeader('Content-Type', 'text/html');
+//   res.end('<h2>Hello World</h2>');
+// });
+
+// server.listen(port, hostname, () => {
+//   console.log(`Server running at http://${hostname}:${port}/`);
+// });
+
+import {a,b} from './mymodule.js';
+import obj from './mymodule.js';
+
+console.log(obj);
+console.log(a , b);
