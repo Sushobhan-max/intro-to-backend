@@ -1,0 +1,91 @@
+=====================================
+MONGOOSE TODO APP - PROJECT NOTES
+=====================================
+
+📁 PROJECT STRUCTURE
+--------------------
+mongoose/
+├── models/
+│   └── Todo.js          # Mongoose schema & model
+├── index.js             # Main Express server
+├── package.json         # Dependencies
+└── notes.txt            # This file
+
+🔧 SETUP & DEPENDENCIES
+-----------------------
+- Node.js with ES6 modules (type: "module" in package.json)
+- Express: ^5.1.0
+- Mongoose: ^9.0.0
+
+Run: npm install
+Dev: npm run dev (uses nodemon)
+
+🗄️ DATABASE CONNECTION
+-----------------------
+MongoDB: mongodb://localhost:27017/mytododatabase
+- Make sure MongoDB is running locally on port 27017
+- Database name: mytododatabase
+- Collection name: myTodosCollection (custom name set in schema)
+
+📋 TODO SCHEMA (models/Todo.js)
+-------------------------------
+Fields:
+  - title: String, required, default: 'My Todo Title'
+  - desc: String
+  - isDone: Boolean
+  - createdAt: Number
+
+🛣️ API ROUTES
+-------------
+1. GET / 
+   - Creates a new todo and saves to database
+   - Demonstrates default values and type casting
+   - Returns: "Hello World!"
+
+2. GET /a
+   - Fetches all todos from database
+   - Returns filtered JSON with only title & desc fields
+   - Uses .map() to filter response
+
+⭐ MONGOOSE TYPE CASTING RULES
+------------------------------
+Schema Type  | What happens if wrong type supplied?
+-------------|----------------------------------------
+String       | Almost anything can be cast → safe
+Number       | Only numeric values work → CastError
+Boolean      | Converts "true"/"false"/1/0 → safe-ish
+Date         | Needs valid date → invalid → error
+ObjectId     | Needs valid MongoDB ID → invalid → error
+
+💡 KEY CONCEPTS DEMONSTRATED
+----------------------------
+1. Top-level await for mongoose.connect()
+2. Creating & saving documents with new Todo()
+3. Default values in schema (title field)
+4. Boolean values accept 0/1 or true/false
+5. Finding all documents with Todo.find({})
+6. Filtering response fields with .map()
+7. Custom collection naming in schema options
+
+🚀 HOW TO RUN
+-------------
+1. Start MongoDB: mongod
+2. Run app: npm run dev
+3. Test routes:
+   - http://localhost:3000/     (creates todo)
+   - http://localhost:3000/a    (gets all todos)
+
+📝 COMMON MONGOOSE OPERATIONS
+-----------------------------
+Create:  const todo = new Todo({...}); await todo.save();
+Find All: await Todo.find({})
+Find One: await Todo.findOne({title: 'xyz'})
+Update:   await Todo.updateOne({_id: id}, {isDone: true})
+Delete:   await Todo.deleteOne({_id: id})
+
+🔍 NOTES
+--------
+- .find() returns an array, even if empty
+- .findOne() returns single object or null
+- Always use await with database operations
+- Schema validation happens on .save()
